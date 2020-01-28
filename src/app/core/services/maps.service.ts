@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { tap, catchError } from 'rxjs/operators';
+import { Geocode } from 'src/app/shared/models/geocode';
 
 @Injectable({
     providedIn: 'root'
@@ -13,8 +14,8 @@ export class MapsService {
 
     getPlacesAutocomplete(params): Observable<any> {
         const apiKey = environment.google_maps_api_key;
-        const url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?` +
-            `input=${params.input}&types=${params.types}&key=${apiKey}`;
+        const url = `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/autocomplete/json?` +
+            `input=${params.address}&types=${params.types}&key=${apiKey}`;
 
         return this.http.get(url)
             .pipe(
@@ -28,7 +29,7 @@ export class MapsService {
         const url = `https://maps.googleapis.com/maps/api/geocode/json?` +
             `address=${params.address}&key=${apiKey}`;
 
-        return this.http.get(url)
+        return this.http.get<any>(url)
             .pipe(
                 tap(weather => weather),
                 catchError(this.handleError('getWeather', []))

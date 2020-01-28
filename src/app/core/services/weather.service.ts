@@ -13,7 +13,7 @@ export class WeatherService {
 
     getDarkyWeather(params): Observable<any> {
         const apiKey = environment.dark_sky_weather_api_key;
-        const url = `https://api.darksky.net/forecast/${apiKey}/${params.latitude},${params.longitude}`;
+        const url = `https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/${apiKey}/${params.latitude},${params.longitude}`;
 
         return this.http.get(url)
             .pipe(
