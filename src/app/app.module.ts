@@ -11,6 +11,7 @@ import { TodaysSummaryComponent } from './shared/components/todays-summary/today
 import { WeeklyGlanceComponent } from './shared/components/weekly-glance/weekly-glance.component';
 import { InfoMessageComponent } from './shared/components/info-message/info-message.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { SearchComponent } from './shared/components/search/search.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     HourlyViewComponent,
     TodaysSummaryComponent,
     WeeklyGlanceComponent,
-    InfoMessageComponent
+    InfoMessageComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
@@ -29,6 +31,9 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     MaterialModule,
     FlexLayoutModule
+  ],
+  entryComponents: [
+      SearchComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

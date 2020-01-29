@@ -14,6 +14,8 @@ import {
     stagger
 } from '@angular/animations';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { SearchComponent } from './shared/components/search/search.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
     selector: 'app-root',
@@ -49,7 +51,7 @@ export class AppComponent implements OnInit {
     public locations: any = [];
     public selectedLocation: string;
     subject: Subject<any> = new Subject();
-    constructor(public weather: WeatherService, public maps: MapsService, public storage: StorageService, private fb: FormBuilder) { }
+    constructor(public weather: WeatherService, public maps: MapsService, public storage: StorageService, private fb: FormBuilder, public dialog: MatDialog) { }
 
     public searchForm: FormGroup;
     public loading: boolean;
@@ -162,6 +164,15 @@ export class AppComponent implements OnInit {
         if (this.storage.getStorageItemByKey('search_history')) {
             this.locations = JSON.parse(this.storage.getStorageItemByKey('search_history'));
         }
+    }
+
+    openSearchDialog() {
+        const dialogRef = this.dialog.open(SearchComponent, {
+            maxWidth: '100vw',
+            maxHeight: '100vh',
+            height: '100%',
+            width: '100%'
+        });
     }
 
     clearSearchField() {
