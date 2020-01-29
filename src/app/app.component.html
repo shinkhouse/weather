@@ -17,6 +17,12 @@
     <mat-icon>settings</mat-icon>
   </button>
 </mat-toolbar>
-<div *ngIf="forecast">{{forecast.currently | json}}</div>
-<div *ngIf="forecast">{{forecast.hourly | json}}</div>
-<div *ngIf="forecast">{{forecast.daily | json}}</div>
+<div *ngIf="forecast">
+  <app-todays-summary [currentWeather]="forecast.currently" [weatherLocation]="selectedLocation"></app-todays-summary>
+  <app-hourly-view [hourlyWeather]="forecast.hourly" [weatherLocation]="selectedLocation"></app-hourly-view>
+  <app-weekly-glance [dailyWeather]="forecast.daily" [weatherLocation]="selectedLocation"></app-weekly-glance>
+</div>
+
+<div *ngIf="!forecast">
+  <app-info-message icon="wb_sunny" message="Try searching for a location!" isSvg="false"></app-info-message>
+</div>

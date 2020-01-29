@@ -1,0 +1,9 @@
+<div class="daily-weather-container">
+    <div class="day" *ngFor="let day of dailyWeather.data">
+        <p>{{day.time}}</p>
+        <p>{{day.summary}}</p>
+        <p>{{day.icon}}</p>
+        <p>{{day.temperatureHigh}}</p>
+        <p>{{day.temperatureLow}}</p>
+    </div>
+</div>

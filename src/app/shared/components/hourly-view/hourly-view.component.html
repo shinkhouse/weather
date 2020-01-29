@@ -1,0 +1,8 @@
+<div class="hourly-container">
+    <div class="hour" *ngFor="let hour of hourlyWeather.data">
+        {{hour.time}}
+        {{hour.icon}}
+        {{hour.temperature}}
+        {{hour.summary}}
+    </div>
+</div>

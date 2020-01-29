@@ -40,6 +40,7 @@ export class AppComponent implements OnInit {
 
     getWeather(location) {
         // this.locations = [];
+        this.selectedLocation = location;
         const geocodeParams = {
             address: location
         };

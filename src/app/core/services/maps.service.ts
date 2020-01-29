@@ -36,6 +36,18 @@ export class MapsService {
             );
     }
 
+    getOpenCageGeocodeByAddress(params) {
+        const apiKey = environment.open_cage_api_key;
+        const url = `https://api.opencagedata.com/geocode/v1/json?q=?` +
+            `q=${params.address}&key=${apiKey}`;
+
+        return this.http.get<any>(url)
+            .pipe(
+                tap(weather => weather),
+                catchError(this.handleError('getWeather', []))
+            );
+    }
+
     private handleError<T>(operation = 'operation', result?: T) {
         return (error: any): Observable<T> => {
             console.error(error);

@@ -1,0 +1,15 @@
+div.message-container {
+    display: block;
+    text-align: center;
+    padding: 32px;
+
+    mat-icon, .mat-icon {
+        font-size: 96px;
+        height: 96px;
+        min-height: 96px;
+        min-width: 96px;
+        opacity: .5;
+        width: 96px;
+    }
+}
+
