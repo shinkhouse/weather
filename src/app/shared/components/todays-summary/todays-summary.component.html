@@ -1,5 +1,6 @@
 <div class="current-forecast">
     <p class="location">{{weatherLocation}}</p>
+    <mat-icon [svgIcon]="currentWeather.icon"></mat-icon>
+    <p class="temperature">{{currentWeather.temperature}}</p>
     <p class="summary">{{currentWeather.summary}}</p>
-    <p class="temp">{{currentWeather.temperature}}</p>
 </div>

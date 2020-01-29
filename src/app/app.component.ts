@@ -44,9 +44,9 @@ export class AppComponent implements OnInit {
         const geocodeParams = {
             address: location
         };
-        this.maps.getGeocodeByAddress(geocodeParams).subscribe(
+        this.maps.getOpenCageGeocodeByAddress(geocodeParams).subscribe(
             address => {
-                const coordinates = address.results[0].geometry.location;
+                const coordinates = address.results[0].geometry;
                 const weatherParams = {
                     latitude: coordinates.lat,
                     longitude: coordinates.lng
