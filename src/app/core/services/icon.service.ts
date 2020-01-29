@@ -29,7 +29,12 @@ export class IconService {
         iconRegistry.addSvgIcon(
             'snowy',
             sanitizer.bypassSecurityTrustResourceUrl('assets/icons/snowy.svg'));
-
+        iconRegistry.addSvgIcon(
+            'fog',
+            sanitizer.bypassSecurityTrustResourceUrl('assets/icons/fog.svg'));
+        iconRegistry.addSvgIcon(
+            'hail',
+            sanitizer.bypassSecurityTrustResourceUrl('assets/icons/hail.svg'));
         iconRegistry.addSvgIcon(
             'clear-night',
             sanitizer.bypassSecurityTrustResourceUrl('assets/icons/clear-night.svg'));
@@ -42,7 +47,7 @@ export class IconService {
         snow: 'snowy',
         sleet: 'sleet',
         wind: 'windy',
-        fog: 'foggy',
+        fog: 'fog',
         cloudy: 'cloudy',
         'partly-cloudy-day': 'partly-cloudy',
         'partly-cloudy-night': 'partly-cloudy',

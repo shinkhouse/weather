@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { IconService } from 'src/app/core/services/icon.service';
 
 @Component({
     selector: 'app-info-message',
@@ -7,7 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class InfoMessageComponent implements OnInit {
 
-    constructor() { }
+    constructor(public icons: IconService) { }
 
     @Input() message: string;
     @Input() icon: string;

@@ -1,0 +1,23 @@
+.mat-title {
+    padding: 24px;
+}
+.hourly-container {
+    white-space: nowrap;
+    width: 100%;
+    overflow: auto;
+
+    .hour {
+        padding: 0px 24px;
+        border: solid rgba(0, 0, 0, 0.12);
+        border-width: 1px 1px 1px 0px;
+        /* border: solid rgba(0, 0, 0, 0.12); */
+        display: inline-block;
+        text-align: center;
+
+        
+    }
+
+    .hour:last-of-type {
+        border: none;
+    }
+}

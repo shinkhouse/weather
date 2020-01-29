@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/core';
 import { DatetimeService } from 'src/app/core/services/datetime.service';
 import { WeatherService } from 'src/app/core/services/weather.service';
 import { IconService } from 'src/app/core/services/icon.service';
@@ -8,17 +8,21 @@ import { IconService } from 'src/app/core/services/icon.service';
     templateUrl: './todays-summary.component.html',
     styleUrls: ['./todays-summary.component.scss']
 })
-export class TodaysSummaryComponent implements OnInit {
+export class TodaysSummaryComponent implements OnInit, OnChanges {
 
     constructor(public datetime: DatetimeService, public weather: WeatherService, public icons: IconService) { }
 
     @Input() currentWeather: any;
     @Input() weatherLocation: string;
 
-    ngOnInit() {
-        console.log(this.weatherLocation);
-        this.currentWeather.temperature = this.weather.getTemperatureFormat(this.currentWeather.temperature);
-        this.currentWeather.icon = this.icons.getIconFromMapping(this.currentWeather.icon);
+    ngOnInit() { }
+
+    ngOnChanges(changes: SimpleChanges) {
+        if (changes.currentWeather.currentValue) {
+            const currentWeather = changes.currentWeather.currentValue;
+            currentWeather.temperature = this.weather.getTemperatureFormat(currentWeather.temperature);
+            currentWeather.icon = this.icons.getIconFromMapping(currentWeather.icon);
+        }
     }
 
 }

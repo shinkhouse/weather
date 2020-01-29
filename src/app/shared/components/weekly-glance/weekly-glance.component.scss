@@ -1,0 +1,11 @@
+.daily-weather-container {
+    .mat-title, .day {
+        padding: 0px 24px;
+    }
+    .time {
+        min-width: 120px;
+    }
+    mat-icon {
+        padding: 0px 16px;
+    }
+}

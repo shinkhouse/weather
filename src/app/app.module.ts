@@ -10,6 +10,7 @@ import { HourlyViewComponent } from './shared/components/hourly-view/hourly-view
 import { TodaysSummaryComponent } from './shared/components/todays-summary/todays-summary.component';
 import { WeeklyGlanceComponent } from './shared/components/weekly-glance/weekly-glance.component';
 import { InfoMessageComponent } from './shared/components/info-message/info-message.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,9 @@ import { InfoMessageComponent } from './shared/components/info-message/info-mess
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     HttpClientModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     MaterialModule,
     FlexLayoutModule

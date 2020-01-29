@@ -1,8 +1,10 @@
+
+<p class="mat-title">Hourly Weather</p>
 <div class="hourly-container">
     <div class="hour" *ngFor="let hour of hourlyWeather.data">
         <p class="time">{{hour.time}}</p>
-        <mat-icon [svgIcon]="hour.icon"></mat-icon>
+        <mat-icon [svgIcon]="hour.icon" matTooltip="{{hour.summary}}"></mat-icon>
         <p class="temperature">{{hour.temperature}}</p>
-        <p class="summary">{{hour.summary}}</p>
+        <!-- <p class="summary">{{hour.summary}}</p> -->
     </div>
 </div>

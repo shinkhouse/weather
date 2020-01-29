@@ -1,15 +1,21 @@
-<mat-toolbar class="mat-elevation-z2">
+<mat-toolbar color="primary" class="mat-elevation-z2">
   Weather
   <div fxFlex></div>
   <div class="autocomplete-field">
-    <mat-icon>search</mat-icon>
-    <input type="text" placeholder="Search Locations" [matAutocomplete]="auto" (ngModel)="selectedLocation">
-    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="getWeather($event.option.value)">
-      <mat-option *ngFor="let location of locations" [value]="location.name">
+      <mat-icon class="search-icon">search</mat-icon>
+          <form class="example-form" [formGroup]='searchForm'>
+    <input type="text" placeholder="Search Locations" [matAutocomplete]="auto" formControlName="searchInput">
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="getWeather($event.option.value)" [displayWith]="searchFieldDisplay">
+      <mat-option *ngFor="let location of locations" [value]="location">
         <mat-icon>{{location.type === 'recent' ? 'history' : 'location_city'}}</mat-icon>
         {{ location.name }}
       </mat-option>
     </mat-autocomplete>
+    
+    <button class="clear-search-button" mat-button *ngIf="searchForm.controls.searchInput.value"  matSuffix mat-icon-button aria-label="Clear" (click)="clearSearchField()">
+        <mat-icon>close</mat-icon>
+    </button>
+</form>
 
   </div>
   <div fxFlex></div>
@@ -17,12 +23,12 @@
     <mat-icon>settings</mat-icon>
   </button>
 </mat-toolbar>
-<div *ngIf="forecast">
+<div *ngIf="forecast" [@listStagger]='forecast.currently'>
   <app-todays-summary [currentWeather]="forecast.currently" [weatherLocation]="selectedLocation"></app-todays-summary>
   <app-hourly-view [hourlyWeather]="forecast.hourly" [weatherLocation]="selectedLocation"></app-hourly-view>
   <app-weekly-glance [dailyWeather]="forecast.daily" [weatherLocation]="selectedLocation"></app-weekly-glance>
 </div>
 
 <div *ngIf="!forecast">
-  <app-info-message icon="wb_sunny" message="Try searching for a location!" isSvg="false"></app-info-message>
+  <app-info-message icon="sunny" message="Try searching for a location!" isSvg="true"></app-info-message>
 </div>

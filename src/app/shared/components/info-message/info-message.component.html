@@ -1,4 +1,5 @@
 <div class="message-container">
-    <mat-icon>{{icon}}</mat-icon>
+    <mat-icon *ngIf="isSvg" [svgIcon]="icon"></mat-icon>
+    <mat-icon *ngIf="!isSvg">{{icon}}</mat-icon>
     <p class="mat-caption">{{message}}</p>
 </div>
