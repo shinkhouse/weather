@@ -14,6 +14,8 @@ import {
     stagger
 } from '@angular/animations';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { SearchComponent } from './shared/components/search/search.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
     selector: 'app-root',
@@ -45,14 +47,15 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class AppComponent implements OnInit {
     public title = 'weather';
+    public loadingMessage = 'Try searching for a location!';
     public forecast: any;
     public locations: any = [];
     public selectedLocation: string;
     subject: Subject<any> = new Subject();
-    constructor(public weather: WeatherService, public maps: MapsService, public storage: StorageService, private fb: FormBuilder) { }
+    constructor(public weather: WeatherService, public maps: MapsService, public storage: StorageService, private fb: FormBuilder, public dialog: MatDialog) { }
 
     public searchForm: FormGroup;
-    public loading: boolean;
+    public loading = false;
 
     ngOnInit() {
         this.getRecentHistory();
@@ -78,8 +81,15 @@ export class AppComponent implements OnInit {
     }
 
     getWeather(location) {
+        this.forecast = [];
+        this.searchForm.patchValue({
+            searchInput: location
+        });
         this.addLocationToRecentHistory(location);
         this.selectedLocation = location.name;
+        this.loading = true;
+        this.loadingMessage = `Finding weather in ${this.selectedLocation}`;
+
         const geocodeParams = {
             address: this.selectedLocation
         };
@@ -93,8 +103,10 @@ export class AppComponent implements OnInit {
 
                 this.weather.getDarkyWeather(weatherParams).subscribe(
                     data => {
-                        console.log(data);
-                        this.forecast = data;
+                        if (data) {
+                            this.loading = false;
+                            this.forecast = data;
+                        }
                     },
                     error => {
                         console.error(error);
@@ -158,14 +170,38 @@ export class AppComponent implements OnInit {
         return locationName ? locationName.name : undefined;
     }
 
+    clearSearchField() {
+        this.searchForm.reset();
+    }
+
     getRecentHistory() {
         if (this.storage.getStorageItemByKey('search_history')) {
             this.locations = JSON.parse(this.storage.getStorageItemByKey('search_history'));
         }
     }
 
-    clearSearchField() {
-        this.searchForm.reset();
+    clearSearchHistory() {
+        this.locations = [];
+        this.storage.setStorageItem('search_history', JSON.stringify([]));
     }
+
+    openSearchDialog() {
+        const dialogRef = this.dialog.open(SearchComponent, {
+            maxWidth: '100vw',
+            maxHeight: '100vh',
+            height: '100%',
+            width: '100%',
+            panelClass: 'search-dialog'
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+                this.getWeather(result);
+            }
+            console.log(result);
+        });
+    }
+
+
 
 }

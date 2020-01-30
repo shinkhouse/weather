@@ -30,3 +30,7 @@ $weather-theme: mat-light-theme($weather-primary, $weather-accent, $weather-warn
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.search-dialog mat-dialog-container {
+    padding: 8px;
+}
