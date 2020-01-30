@@ -12,6 +12,8 @@ import { WeeklyGlanceComponent } from './shared/components/weekly-glance/weekly-
 import { InfoMessageComponent } from './shared/components/info-message/info-message.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SearchComponent } from './shared/components/search/search.component';
+import { HourlyGraphComponent } from './shared/components/hourly-graph/hourly-graph.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { SearchComponent } from './shared/components/search/search.component';
     TodaysSummaryComponent,
     WeeklyGlanceComponent,
     InfoMessageComponent,
-    SearchComponent
+    SearchComponent,
+    HourlyGraphComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +33,8 @@ import { SearchComponent } from './shared/components/search/search.component';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MaterialModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    NgxChartsModule
   ],
   entryComponents: [
       SearchComponent

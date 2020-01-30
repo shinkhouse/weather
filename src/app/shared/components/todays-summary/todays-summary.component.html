@@ -1,4 +1,4 @@
-<div class="current-forecast">
+<div class="current-forecast" *ngIf="currentWeather">
     <p class="location">{{weatherLocation}}</p>
     <div class="icon-temp-container">
         <mat-icon [svgIcon]="currentWeather.icon"></mat-icon>

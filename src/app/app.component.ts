@@ -81,7 +81,7 @@ export class AppComponent implements OnInit {
     }
 
     getWeather(location) {
-        this.forecast = [];
+
         this.searchForm.patchValue({
             searchInput: location
         });
@@ -104,6 +104,7 @@ export class AppComponent implements OnInit {
                 this.weather.getDarkyWeather(weatherParams).subscribe(
                     data => {
                         if (data) {
+                            this.forecast = [];
                             this.loading = false;
                             this.forecast = data;
                         }

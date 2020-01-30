@@ -27,10 +27,72 @@ $weather-theme: mat-light-theme($weather-primary, $weather-accent, $weather-warn
 @include angular-material-theme($weather-theme);
 
 /* You can add global styles to this file, and also import other style files */
+::-webkit-scrollbar {
+    width: 8px !important;
+    height: 8px !important;
+}
 
+::-webkit-scrollbar-thumb {
+    background-color: #a7a7a7 !important;
+    border-radius: 5px !important;
+}
+
+::-webkit-scrollbar-track {
+    background-color: transparent !important;
+    margin: 2px !important;
+}
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .search-dialog mat-dialog-container {
     padding: 8px;
 }
+
+.ngx-charts .line-highlight {
+    display: block !important;
+}
+
+.line-chart {
+    transform: translate(0,0) scaleX(1.031);
+}
+
+@media only screen and (min-width: 320px) {
+    .line-chart {
+        transform: translate(0, 0) scaleX(1.23);
+    }
+}
+
+@media only screen and (min-width: 375px) {
+    .line-chart {
+        transform: translate(0, 0) scaleX(1.2);
+    }
+}
+
+@media only screen and (min-width: 425px) {
+    .line-chart {
+        transform: translate(0, 0) scaleX(1.15);
+    }
+}
+
+@media only screen and (min-width: 500px) {
+    .line-chart {
+        transform: translate(0, 0) scaleX(1.13);
+    }
+}
+
+@media only screen and (min-width: 620px) {
+    .line-chart {
+        transform: translate(0, 0) scaleX(1.105);
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .line-chart {
+        transform: translate(0,0) scaleX(1.031);
+    }
+}
+
+[ngx-charts-x-axis], [ngx-charts-y-axis] {
+    display: none;
+}
+
