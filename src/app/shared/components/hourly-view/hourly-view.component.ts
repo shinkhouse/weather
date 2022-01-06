@@ -18,8 +18,8 @@ export class HourlyViewComponent implements OnInit, OnChanges {
     ngOnInit() {}
 
     ngOnChanges(changes: SimpleChanges) {
-        if (changes.hourlyWeather.currentValue) {
-            changes.hourlyWeather.currentValue.data.forEach(hour => {
+        if (changes.hourlyWeather && changes.hourlyWeather.currentValue) {
+            changes.hourlyWeather.currentValue.data.forEach((hour) => {
                 hour.time = this.datetime.getTimeOfDay(hour.time);
                 hour.temperature = this.weather.getTemperatureFormat(hour.temperature);
                 hour.icon = this.icons.getIconFromMapping(hour.icon);
