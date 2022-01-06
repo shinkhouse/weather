@@ -1,5 +1,5 @@
 <div class="message-container">
-    <mat-icon *ngIf="isSvg" [svgIcon]="icon"></mat-icon>
-    <mat-icon *ngIf="!isSvg">{{icon}}</mat-icon>
+    <mat-icon [ngClass]="{'rotate': rotate === true}" *ngIf="isSvg" [svgIcon]="icon"></mat-icon>
+    <mat-icon [ngClass]="{'rotate': rotate === true}" *ngIf="!isSvg">{{icon}}</mat-icon>
     <p class="mat-caption">{{message}}</p>
 </div>

@@ -1,5 +1,5 @@
-<div class="daily-weather-container">
-    <p class="mat-title">This Week's Weather</p>
+<div *ngIf="dailyWeather" class="daily-weather-container">
+    <!-- <p class="mat-title">This Week's Weather</p> -->
     <div class="day" *ngFor="let day of dailyWeather.data" fxLayout="row" fxLayoutAlign="start center">
         <p class="time">{{day.time}}</p>
         <p class="summary mat-caption">{{day.summary}}</p>

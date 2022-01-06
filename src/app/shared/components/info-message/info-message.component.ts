@@ -13,6 +13,7 @@ export class InfoMessageComponent implements OnInit {
     @Input() message: string;
     @Input() icon: string;
     @Input() isSvg: boolean;
+    @Input() rotate: boolean;
 
     ngOnInit() {
     }
