@@ -18,7 +18,7 @@ export class TodaysSummaryComponent implements OnInit, OnChanges {
     ngOnInit() { }
 
     ngOnChanges(changes: SimpleChanges) {
-        if (changes.currentWeather.currentValue) {
+        if (changes.currentWeather && changes.currentWeather.currentValue) {
             const currentWeather = changes.currentWeather.currentValue;
             currentWeather.temperature = this.weather.getTemperatureFormat(currentWeather.temperature);
             currentWeather.icon = this.icons.getIconFromMapping(currentWeather.icon);

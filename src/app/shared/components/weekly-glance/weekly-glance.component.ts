@@ -18,8 +18,8 @@ export class WeeklyGlanceComponent implements OnInit, OnChanges {
     ngOnInit() {}
 
     ngOnChanges(changes: SimpleChanges) {
-        if (changes.dailyWeather.currentValue) {
-            changes.dailyWeather.currentValue.data.forEach(day => {
+        if (changes.dailyWeather && changes.dailyWeather.currentValue) {
+            changes.dailyWeather.currentValue.data.forEach((day) => {
                 day.time = this.datetime.getWeekDate(day.time);
                 day.temperatureHigh = this.weather.getTemperatureFormat(day.temperatureHigh);
                 day.temperatureLow = this.weather.getTemperatureFormat(day.temperatureLow);
