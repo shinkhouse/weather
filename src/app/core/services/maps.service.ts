@@ -13,9 +13,9 @@ export class MapsService {
     constructor(private http: HttpClient) { }
 
     getPlacesAutocomplete(params): Observable<any> {
-        const apiKey = environment.google_maps_api_key;
-        const url = `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/autocomplete/json?` +
-            `input=${params.address}&types=${params.types}&key=${apiKey}`;
+        const url =
+            `https://api.samuelhinkhouse.com/maps/api/place/autocomplete/json?` +
+            `input=${params.address}&types=${params.types}`;
 
         return this.http.get(url)
             .pipe(
@@ -25,9 +25,7 @@ export class MapsService {
     }
 
     getGeocodeByAddress(params) {
-        const apiKey = environment.google_maps_api_key;
-        const url = `https://maps.googleapis.com/maps/api/geocode/json?` +
-            `address=${params.address}&key=${apiKey}`;
+        const url = `https://api.samuelhinkhouse.com/maps/api/geocode/json?` + `address=${params.address}`;
 
         return this.http.get<any>(url)
             .pipe(
@@ -37,9 +35,7 @@ export class MapsService {
     }
 
     getOpenCageGeocodeByAddress(params) {
-        const apiKey = environment.open_cage_api_key;
-        const url = `https://api.opencagedata.com/geocode/v1/json?q=?` +
-            `q=${params.address}&key=${apiKey}`;
+        const url = `https://api.samuelhinkhouse.com/geocode/v1/json?q=?` + `q=${params.address}`;
 
         return this.http.get<any>(url)
             .pipe(

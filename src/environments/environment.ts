@@ -4,9 +4,6 @@
 
 export const environment = {
     production: false,
-    dark_sky_weather_api_key: '<insert api key here>',
-    google_maps_api_key: '<insert api key here>',
-    open_cage_api_key: '<insert api key here>'
 };
 
 /*
