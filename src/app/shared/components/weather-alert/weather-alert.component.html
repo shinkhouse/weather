@@ -1,0 +1,14 @@
+<mat-card>
+    <div fxLayout="row" fxLayout="start center">
+        <div layout="row">
+            <mat-icon>warning</mat-icon>
+            <mat-card-title>Weather Alert {{weatherAlertTitle}}</mat-card-title>
+        </div>
+        <div fxLayout="column">
+            <mat-card-subtitle>Expires on {{weatherAlertExpiration * 1000 | date: 'medium'}}</mat-card-subtitle>
+            <mat-card-content>
+                {{weatherAlertContent}}
+            </mat-card-content>
+        </div>
+    </div>
+</mat-card>

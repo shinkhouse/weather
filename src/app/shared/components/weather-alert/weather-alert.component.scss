@@ -1,0 +1,13 @@
+mat-card {
+    background: rgba(255,0,0,.1);
+    border: 1px solid red;
+    border-radius: 0px;
+    margin: 16px;
+    mat-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 60px;
+        margin-right: 16px;
+        color: red;
+    }
+}

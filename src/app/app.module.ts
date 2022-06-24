@@ -15,6 +15,7 @@ import { SearchComponent } from './shared/components/search/search.component';
 import { HourlyGraphComponent } from './shared/components/hourly-graph/hourly-graph.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { WeatherIconComponent } from './shared/components/weather-icon/weather-icon.component';
+import { WeatherAlertComponent } from './shared/components/weather-alert/weather-alert.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { WeatherIconComponent } from './shared/components/weather-icon/weather-i
     InfoMessageComponent,
     SearchComponent,
     HourlyGraphComponent,
-    WeatherIconComponent
+    WeatherIconComponent,
+    WeatherAlertComponent
   ],
   imports: [
     BrowserModule,
