@@ -35,7 +35,7 @@ export class MapsService {
     }
 
     getOpenCageGeocodeByAddress(params) {
-        const url = `https://api.samuelhinkhouse.com/geocode/v1/json?q=?` + `q=${params.address}`;
+        const url = `https://api.samuelhinkhouse.com/geocode/v1/json?` + `address=${params.address}`;
 
         return this.http.get<any>(url)
             .pipe(
