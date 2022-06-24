@@ -5,4 +5,5 @@
         <p class="temperature">{{currentWeather.temperature}}</p>
     </div>
     <p class="summary">{{currentWeather.summary}}</p>
+    <p *ngIf="currentWeather.apparentTemperature">Feels like {{currentWeather.apparentTemperature}}°F</p>
 </div>
