@@ -9,6 +9,10 @@
     mat-icon {
         padding: 0px 16px;
     }
+    .temperature {
+        width: 150px;
+        text-align: right;
+    }
 }
 
 @media only screen and (max-width: 525px) {
