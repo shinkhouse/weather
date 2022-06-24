@@ -14,6 +14,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SearchComponent } from './shared/components/search/search.component';
 import { HourlyGraphComponent } from './shared/components/hourly-graph/hourly-graph.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { WeatherIconComponent } from './shared/components/weather-icon/weather-icon.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     WeeklyGlanceComponent,
     InfoMessageComponent,
     SearchComponent,
-    HourlyGraphComponent
+    HourlyGraphComponent,
+    WeatherIconComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +36,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     BrowserAnimationsModule,
     MaterialModule,
     FlexLayoutModule,
-    NgxChartsModule
+    NgxChartsModule,
   ],
   entryComponents: [
       SearchComponent

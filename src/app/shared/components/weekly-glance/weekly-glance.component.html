@@ -1,10 +1,13 @@
-<div *ngIf="dailyWeather" class="daily-weather-container">
+<div @listStagger *ngIf="dailyWeather" class="daily-weather-container">
     <!-- <p class="mat-title">This Week's Weather</p> -->
     <div class="day" *ngFor="let day of dailyWeather.data" fxLayout="row" fxLayoutAlign="start center">
-        <p class="time">{{day.time}}</p>
+        <div fxLayout="column" fxLayoutAlign="start start">
+            <p class="time">{{day.weekdayName}}</p>
+            <p class="time">{{day.time * 1000 | date: 'MMMM d, y'}}</p>
+        </div>
         <p class="summary mat-caption">{{day.summary}}</p>
         <div fxFlex></div>
-        <mat-icon [svgIcon]="day.icon"></mat-icon>
+        <app-weather-icon [icon]="day.icon" [summary]="day.summary"></app-weather-icon>
         <div class="temperature">
             <p>{{day.temperatureHigh}}/{{day.temperatureLow}}</p>
         </div>

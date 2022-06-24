@@ -1,7 +1,7 @@
-<div class="current-forecast" *ngIf="currentWeather">
+<div @listStagger class="current-forecast" *ngIf="currentWeather">
     <p class="location">{{weatherLocation}}</p>
     <div class="icon-temp-container">
-        <mat-icon [svgIcon]="currentWeather.icon"></mat-icon>
+        <app-weather-icon size="large" [icon]="currentWeather.icon" [summary]="currentWeather.summary"></app-weather-icon>
         <p class="temperature">{{currentWeather.temperature}}</p>
     </div>
     <p class="summary">{{currentWeather.summary}}</p>

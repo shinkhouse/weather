@@ -2,11 +2,13 @@ import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/cor
 import { WeatherService } from 'src/app/core/services/weather.service';
 import { DatetimeService } from 'src/app/core/services/datetime.service';
 import { IconService } from 'src/app/core/services/icon.service';
+import { items, list, listStagger } from 'src/app/core/animations/list-stagger.animation';
 
 @Component({
     selector: 'app-weekly-glance',
     templateUrl: './weekly-glance.component.html',
-    styleUrls: ['./weekly-glance.component.scss']
+    styleUrls: ['./weekly-glance.component.scss'],
+    animations: [list, items, listStagger]
 })
 export class WeeklyGlanceComponent implements OnInit, OnChanges {
 
@@ -20,7 +22,7 @@ export class WeeklyGlanceComponent implements OnInit, OnChanges {
     ngOnChanges(changes: SimpleChanges) {
         if (changes.dailyWeather && changes.dailyWeather.currentValue) {
             changes.dailyWeather.currentValue.data.forEach((day) => {
-                day.time = this.datetime.getWeekDate(day.time);
+                day.weekdayName = this.datetime.getWeekDate(day.time);
                 day.temperatureHigh = this.weather.getTemperatureFormat(day.temperatureHigh);
                 day.temperatureLow = this.weather.getTemperatureFormat(day.temperatureLow);
                 day.icon = this.icons.getIconFromMapping(day.icon);

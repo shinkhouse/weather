@@ -2,11 +2,13 @@ import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/cor
 import { DatetimeService } from 'src/app/core/services/datetime.service';
 import { WeatherService } from 'src/app/core/services/weather.service';
 import { IconService } from 'src/app/core/services/icon.service';
+import { listStagger } from 'src/app/core/animations/list-stagger.animation';
 
 @Component({
     selector: 'app-todays-summary',
     templateUrl: './todays-summary.component.html',
-    styleUrls: ['./todays-summary.component.scss']
+    styleUrls: ['./todays-summary.component.scss'],
+    animations: [listStagger]
 })
 export class TodaysSummaryComponent implements OnInit, OnChanges {
 

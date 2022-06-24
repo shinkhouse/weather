@@ -4,46 +4,19 @@ import { MapsService } from './core/services/maps.service';
 import { StorageService } from './core/services/storage.service';
 import { Subject } from 'rxjs';
 import { debounceTime, tap, switchMap, finalize } from 'rxjs/operators';
-import {
-    trigger,
-    state,
-    style,
-    animate,
-    transition,
-    query,
-    stagger
-} from '@angular/animations';
+import { trigger, state, style, animate, transition, query, stagger } from '@angular/animations';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { SearchComponent } from './shared/components/search/search.component';
 import { MatDialog } from '@angular/material/dialog';
+import { listStagger } from './core/animations/list-stagger.animation';
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
     animations: [
-        trigger('listStagger', [
-            transition('* <=> *', [
-                query(
-                    ':enter',
-                    [
-                        style({ opacity: 0, transform: 'translateY(-15px)' }),
-                        stagger(
-                            '20ms',
-                            animate(
-                                '550ms ease-out',
-                                style({ opacity: 1, transform: 'translateY(0px)' })
-                            )
-                        )
-                    ],
-                    { optional: true }
-                ),
-                query(':leave', animate('20ms', style({ opacity: 0 })), {
-                    optional: true
-                })
-            ])
-        ])
-    ]
+        listStagger
+    ],
 })
 export class AppComponent implements OnInit {
     public title = 'weather';
@@ -52,7 +25,13 @@ export class AppComponent implements OnInit {
     public locations: any = [];
     public selectedLocation: string;
     subject: Subject<any> = new Subject();
-    constructor(public weather: WeatherService, public maps: MapsService, public storage: StorageService, private fb: FormBuilder, public dialog: MatDialog) { }
+    constructor(
+        public weather: WeatherService,
+        public maps: MapsService,
+        public storage: StorageService,
+        private fb: FormBuilder,
+        public dialog: MatDialog
+    ) {}
 
     public searchForm: FormGroup;
     public loading = false;
@@ -60,30 +39,44 @@ export class AppComponent implements OnInit {
     ngOnInit() {
         this.getRecentHistory();
         this.searchForm = this.fb.group({
-            searchInput: null
+            searchInput: null,
         });
 
         this.searchForm
             .get('searchInput')
-            .valueChanges
-            .pipe(
-                debounceTime(300)
-            )
-            .subscribe(value => {
+            .valueChanges.pipe(debounceTime(300))
+            .subscribe((value) => {
                 if (value) {
                     this.getPlacesAutocompleteByLocationKeyword(value);
                 } else {
                     this.getRecentHistory();
                 }
             });
-        // this.getCoordinatesByLocationName('Houston, TX');
-        // this.getWeather(42.3601, -71.0589);
+        this.getLocation();
+    }
+
+    getLocation(): void {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((position) => {
+                const location = position;
+                const longitude = position.coords.longitude;
+                const latitude = position.coords.latitude;
+
+                const weatherParams = {
+                    latitude: latitude,
+                    longitude: longitude
+                }
+                this.getWeatherForecast(weatherParams);
+                console.log(position);
+            });
+        } else {
+            console.log('No support for geolocation');
+        }
     }
 
     getWeather(location) {
-
         this.searchForm.patchValue({
-            searchInput: location
+            searchInput: location,
         });
         this.addLocationToRecentHistory(location);
         this.selectedLocation = location.name;
@@ -91,30 +84,33 @@ export class AppComponent implements OnInit {
         this.loadingMessage = `Finding weather in ${this.selectedLocation}`;
 
         const geocodeParams = {
-            address: this.selectedLocation
+            address: this.selectedLocation,
         };
         this.maps.getOpenCageGeocodeByAddress(geocodeParams).subscribe(
-            address => {
+            (address) => {
                 const coordinates = address.results[0].geometry;
                 const weatherParams = {
                     latitude: coordinates.lat,
-                    longitude: coordinates.lng
+                    longitude: coordinates.lng,
                 };
-
-                this.weather.getDarkyWeather(weatherParams).subscribe(
-                    data => {
-                        if (data) {
-                            this.forecast = [];
-                            this.loading = false;
-                            this.forecast = data;
-                        }
-                    },
-                    error => {
-                        console.error(error);
-                    }
-                );
+                this.getWeatherForecast(weatherParams);
             },
-            error => {
+            (error) => {
+                console.error(error);
+            }
+        );
+    }
+
+    getWeatherForecast(weatherParams) {
+        this.weather.getDarkyWeather(weatherParams).subscribe(
+            (data) => {
+                if (data) {
+                    this.forecast = [];
+                    this.loading = false;
+                    this.forecast = data;
+                }
+            },
+            (error) => {
                 console.error(error);
             }
         );
@@ -124,23 +120,23 @@ export class AppComponent implements OnInit {
         this.locations = [];
         const params = {
             address: location,
-            types: '(cities)'
+            types: '(cities)',
         };
         this.maps.getPlacesAutocomplete(params).subscribe(
-            data => {
+            (data) => {
                 if (data) {
                     console.log(data);
-                    data.predictions.forEach(prediction => {
+                    data.predictions.forEach((prediction) => {
                         console.log(prediction);
                         this.locations.push({
                             name: prediction.description,
-                            type: 'search_query'
+                            type: 'search_query',
                         });
                     });
                 }
                 // this.forecast = data;
             },
-            error => {
+            (error) => {
                 console.error(error);
             }
         );
@@ -152,7 +148,7 @@ export class AppComponent implements OnInit {
             let searchHistory = JSON.parse(this.storage.getStorageItemByKey('search_history'));
             searchHistory.push(location);
             searchHistory = searchHistory.reduce((acc, current) => {
-                const x = acc.find(item => item.name === current.name);
+                const x = acc.find((item) => item.name === current.name);
                 if (!x) {
                     return acc.concat([current]);
                 } else {
@@ -192,17 +188,14 @@ export class AppComponent implements OnInit {
             maxHeight: '100vh',
             height: '100%',
             width: '100%',
-            panelClass: 'search-dialog'
+            panelClass: 'search-dialog',
         });
 
-        dialogRef.afterClosed().subscribe(result => {
+        dialogRef.afterClosed().subscribe((result) => {
             if (result) {
                 this.getWeather(result);
             }
             console.log(result);
         });
     }
-
-
-
 }

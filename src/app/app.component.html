@@ -32,7 +32,7 @@
       <mat-icon>settings</mat-icon>
     </button>
   </mat-toolbar>
-  <div *ngIf="forecast" [@listStagger]='forecast' fxLayout="column">
+  <div *ngIf="forecast"  fxLayout="column">
     <div class="graph-container" *ngIf="forecast.hourly" fxFlex>
       <app-hourly-graph [hourlyWeather]="forecast.hourly"></app-hourly-graph>
     </div>
