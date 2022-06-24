@@ -40,8 +40,14 @@ $weather-theme: mat.define-light-theme($weather-primary, $weather-accent, $weath
     background-color: transparent !important;
     margin: 2px !important;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+    height: 100%;
+}
+body {
+    margin: 0;
+    font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
 
 .search-dialog mat-dialog-container {
     padding: 8px;
@@ -52,7 +58,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .line-chart {
-    transform: translate(0,0) scaleX(1.031);
+    transform: translate(0, 0) scaleX(1.031);
 }
 
 @media only screen and (min-width: 320px) {
@@ -87,11 +93,19 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 @media only screen and (min-width: 768px) {
     .line-chart {
-        transform: translate(0,0) scaleX(1.031);
+        transform: translate(0, 0) scaleX(1.031);
     }
 }
 
-[ngx-charts-x-axis], [ngx-charts-y-axis] {
+[ngx-charts-x-axis],
+[ngx-charts-y-axis] {
     display: none;
 }
 
+.sunny {
+    color: #ffd400;
+}
+
+.clear-night {
+    color: purple;
+}
