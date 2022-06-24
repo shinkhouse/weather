@@ -107,5 +107,28 @@ body {
 }
 
 .clear-night {
-    color: purple;
+    color: #ff23ff;
+}
+
+.rainy {
+    color: #1783ff;
+}
+
+body.dark {
+    $weather-primary: mat.define-palette(mat.$blue-palette);
+    $weather-accent: mat.define-palette(mat.$blue-palette, A200, A100, A400);
+
+    // The warn palette is optional (defaults to red).
+    $weather-warn: mat.define-palette(mat.$red-palette);
+
+    // Create the theme object (a Sass map containing all of the palettes).
+    $weather-dark-theme: mat.define-dark-theme($weather-primary, $weather-accent, $weather-warn);
+
+    // Include theme styles for core and each component used in your app.
+    // Alternatively, you can import and @include the theme mixins for each component
+    // that you are using.
+    @include mat.all-component-themes($weather-dark-theme);
+
+    background: #212121;
+    color: white;
 }
