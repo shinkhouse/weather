@@ -6,4 +6,14 @@
     </div>
     <p class="summary">{{currentWeather.summary}}</p>
     <p *ngIf="currentWeather.apparentTemperature">Feels like {{currentWeather.apparentTemperature}}°F</p>
+    <div *ngIf="currentWeather.sunCalculation" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
+        <div fxLayout="row" fxLayoutAlign="start center" matTooltip="Sunrise time">
+            <mat-icon svgIcon="sunrise"></mat-icon>
+            {{currentWeather.sunCalculation.sunrise | date: 'shortTime'}}
+        </div>
+        <div  fxLayout="row" fxLayoutAlign="start center" matTooltip="Sunset time">
+            <mat-icon svgIcon="sunset"></mat-icon>
+            {{currentWeather.sunCalculation.sunset | date: 'shortTime'}}
+        </div>
+    </div>
 </div>

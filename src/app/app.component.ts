@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { WeatherService } from './core/services/weather.service';
 import { MapsService } from './core/services/maps.service';
 import { StorageService } from './core/services/storage.service';
@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { SearchComponent } from './shared/components/search/search.component';
 import { MatDialog } from '@angular/material/dialog';
 import { listStagger } from './core/animations/list-stagger.animation';
+import * as suncalc from 'suncalc';
 
 @Component({
     selector: 'app-root',
@@ -24,15 +25,17 @@ export class AppComponent implements OnInit {
     public forecast: any;
     public locations: any = [];
     public selectedLocation: string;
+    public sunCalculation: any;
     subject: Subject<any> = new Subject();
     constructor(
         public weather: WeatherService,
         public maps: MapsService,
         public storage: StorageService,
         private fb: FormBuilder,
-        public dialog: MatDialog
+        public dialog: MatDialog,
+        private renderer: Renderer2
     ) {}
-
+    public darkMode: boolean = false;
     public searchForm: FormGroup;
     public loading = false;
 
@@ -55,6 +58,11 @@ export class AppComponent implements OnInit {
         this.getLocation();
     }
 
+    toggleDarkMode() {
+        this.darkMode = !this.darkMode;
+        this.darkMode ? this.renderer.addClass(document.body, 'dark') : this.renderer.removeClass(document.body, 'dark');
+    }
+
     getLocation(): void {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((position) => {
@@ -67,6 +75,7 @@ export class AppComponent implements OnInit {
                     longitude: longitude
                 }
                 this.getWeatherForecast(weatherParams);
+                this.sunCalculation = suncalc.getTimes(new Date(), latitude, longitude);
                 console.log(position);
             });
         } else {
@@ -93,6 +102,8 @@ export class AppComponent implements OnInit {
                     latitude: coordinates.lat,
                     longitude: coordinates.lng,
                 };
+
+               
                 this.getWeatherForecast(weatherParams);
             },
             (error) => {
@@ -108,6 +119,14 @@ export class AppComponent implements OnInit {
                     this.forecast = [];
                     this.loading = false;
                     this.forecast = data;
+                    this.sunCalculation = suncalc.getTimes(
+                        new Date(),
+                        weatherParams.latitude,
+                        weatherParams.longitude
+                    );
+                    if(this.sunCalculation) {
+                        this.forecast.currently.sunCalculation = this.sunCalculation;
+                    }
                 }
             },
             (error) => {
