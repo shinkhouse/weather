@@ -36,6 +36,9 @@
     <div class="graph-container" *ngIf="forecast.hourly" fxFlex>
       <app-hourly-graph [hourlyWeather]="forecast.hourly"></app-hourly-graph>
     </div>
+    <div class="alerts-container" *ngIf="forecast.alerts">
+      <app-weather-alert *ngFor="let alert of forecast.alerts" [weatherAlertTitle]="alert.title" [weatherAlertContent]="alert.description" [weatherAlertExpiration]="alert.expires"></app-weather-alert>
+    </div>
     <app-todays-summary [currentWeather]="forecast.currently" [weatherLocation]="selectedLocation"></app-todays-summary>
     <app-hourly-view [hourlyWeather]="forecast.hourly" [weatherLocation]="selectedLocation"></app-hourly-view>
     <app-weekly-glance [dailyWeather]="forecast.daily" [weatherLocation]="selectedLocation"></app-weekly-glance>
