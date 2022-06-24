@@ -1,16 +1,12 @@
 .current-forecast {
     text-align: center;
-    .mat-icon {
-        width: 108px;
-        height: 108px;
-    }
     .temperature {
         font-size: 64px;
         font-weight: 600;
         margin: 16px;
     }
     .summary {
-        color: rgba(0,0,0,.54);
+        opacity: 0.54;
         font-size: 24px;
         margin: 0px;
     }
