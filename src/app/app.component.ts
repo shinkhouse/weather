@@ -15,9 +15,7 @@ import * as suncalc from 'suncalc';
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
-    animations: [
-        listStagger
-    ],
+    animations: [listStagger],
 })
 export class AppComponent implements OnInit {
     public title = 'weather';
@@ -76,8 +74,8 @@ export class AppComponent implements OnInit {
 
                 const weatherParams = {
                     latitude: latitude,
-                    longitude: longitude
-                }
+                    longitude: longitude,
+                };
                 this.getWeatherForecast(weatherParams);
                 this.sunCalculation = suncalc.getTimes(new Date(), latitude, longitude);
                 console.log(position);
@@ -107,7 +105,6 @@ export class AppComponent implements OnInit {
                     longitude: coordinates.lng,
                 };
 
-               
                 this.getWeatherForecast(weatherParams);
             },
             (error) => {
@@ -123,12 +120,8 @@ export class AppComponent implements OnInit {
                     this.forecast = [];
                     this.loading = false;
                     this.forecast = data;
-                    this.sunCalculation = suncalc.getTimes(
-                        new Date(),
-                        weatherParams.latitude,
-                        weatherParams.longitude
-                    );
-                    if(this.sunCalculation) {
+                    this.sunCalculation = suncalc.getTimes(new Date(), weatherParams.latitude, weatherParams.longitude);
+                    if (this.sunCalculation) {
                         this.forecast.currently.sunCalculation = this.sunCalculation;
                     }
                 }
