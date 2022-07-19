@@ -7,6 +7,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class IconService {
     constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
+        iconRegistry.addSvgIcon('sunny-outline', sanitizer.bypassSecurityTrustResourceUrl('assets/icons/sunny-outline.svg'));
         iconRegistry.addSvgIcon('sunny', sanitizer.bypassSecurityTrustResourceUrl('assets/icons/sunny.svg'));
         iconRegistry.addSvgIcon('partly-cloudy', sanitizer.bypassSecurityTrustResourceUrl('assets/icons/partly-cloudy.svg'));
         iconRegistry.addSvgIcon('windy', sanitizer.bypassSecurityTrustResourceUrl('assets/icons/windy.svg'));

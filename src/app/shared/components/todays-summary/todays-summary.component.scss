@@ -1,7 +1,10 @@
 .current-forecast {
     text-align: center;
+    .location {
+        font-weight: 700;
+    }
     .temperature {
-        font-size: 64px;
+        font-size: 96px;
         font-weight: 600;
         margin: 16px;
     }
@@ -10,4 +13,9 @@
         font-size: 24px;
         margin: 0px;
     }
+}
+
+.vertical-divider {
+    border-left: 1px solid white;
+    height: 100%;
 }

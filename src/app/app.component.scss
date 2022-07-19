@@ -1,50 +1,66 @@
-.autocomplete-field {
-    display: flex;
-    align-items: center;
-    background: rgba(0, 0, 0, 0.12);
-    height: calc(100% - 16px);
-    border-radius: 4px;
-    width: 50%;
-    max-width: 512px;
-
-    mat-icon.search-icon {
-        padding: 0px 14px;
-        position: absolute;
-        pointer-events: none;
+.todays-summary-container {
+    background: #0093e9;
+    background: linear-gradient(315deg, rgba(2, 180, 214, 1) 0%, rgba(0, 147, 233, 1) 100%);
+    color: white;
+    padding-bottom: 24px;
+}
+mat-toolbar {
+    color: white;
+    background: transparent !important;
+    .autocomplete-field {
+        display: flex;
+        align-items: center;
+        background: rgba(0, 0, 0, 0.12);
+        height: calc(100% - 16px);
+        border-radius: 4px;
+        width: 50%;
+        max-width: 512px;
+    
+        mat-icon.search-icon {
+            padding: 0px 14px;
+            position: absolute;
+            pointer-events: none;
+        }
+    
+        form {
+            width: 100%;
+            height: 100%;
+        }
+    
+        input {
+            font-family: Roboto, sans-serif;
+            background: none;
+            border: none;
+            width: 100%;
+            height: 100%;
+            outline: none;
+            box-sizing: border-box;
+            padding-left: 52px;
+            font-size: 16px;
+            font-weight: 400;
+            color: white;
+        }
+    
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.47);
+        }
+    
+        .clear-search-button {
+            position: relative;
+            right: 44px;
+            top: -2px;
+        }
     }
-
-    form {
-        width: 100%;
-        height: 100%;
-    }
-
-    input {
-        font-family: Roboto, sans-serif;
-        background: none;
-        border: none;
-        width: 100%;
-        height: 100%;
-        outline: none;
-        box-sizing: border-box;
-        padding-left: 52px;
-        font-size: 16px;
-        font-weight: 400;
-        color: white;
-    }
-
-    input::placeholder {
-        color: rgba(255, 255, 255, 0.47);
-    }
-
-    .clear-search-button {
-        position: relative;
-        right: 44px;
-        top: -2px;
+    
+    .search-dialog-button {
+        display: none;
     }
 }
 
-.search-dialog-button {
-    display: none;
+.weather-info-card {
+    position: relative;
+    top: -20px;
+    border-radius: 24px;
 }
 
 @media only screen and (max-width: 768px) {
@@ -56,22 +72,7 @@
         display: block;
     }
 }
-.graph-container {
-    width: 100%;
-}
-app-hourly-graph {
-    width: 100% !important;
-    height: 500px;
-    opacity: .75;
-}
 
 main {
     width: 100%;
-}
-
-app-todays-summary {
-    position: absolute;
-    top: 75px;
-    left: 50%;
-    transform: translate(-50%, 50px);
 }
