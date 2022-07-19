@@ -16,6 +16,7 @@ import { HourlyGraphComponent } from './shared/components/hourly-graph/hourly-gr
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { WeatherIconComponent } from './shared/components/weather-icon/weather-icon.component';
 import { WeatherAlertComponent } from './shared/components/weather-alert/weather-alert.component';
+import { TitleCasePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,7 @@ import { WeatherAlertComponent } from './shared/components/weather-alert/weather
   entryComponents: [
       SearchComponent
   ],
-  providers: [],
+  providers: [TitleCasePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

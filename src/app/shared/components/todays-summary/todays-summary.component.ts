@@ -16,6 +16,7 @@ export class TodaysSummaryComponent implements OnInit, OnChanges {
 
     @Input() currentWeather: any;
     @Input() weatherLocation: string;
+    public currentDate: Date = new Date();
 
     ngOnInit() { }
 

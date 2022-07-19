@@ -1,58 +1,58 @@
 <main fxLayout="column">
-    <mat-toolbar color="primary" class="mat-elevation-z2">
-        Weather
-        <div fxFlex></div>
-        <div class="autocomplete-field">
-            <mat-icon class="search-icon">search</mat-icon>
-            <form class="example-form" [formGroup]="searchForm">
-                <input type="text" placeholder="Search Locations" [matAutocomplete]="auto" formControlName="searchInput" />
-                <mat-autocomplete
-                    #auto="matAutocomplete"
-                    (optionSelected)="getWeather($event.option.value)"
-                    [displayWith]="searchFieldDisplay"
-                >
-                    <mat-option *ngFor="let location of locations" [value]="location">
-                        <mat-icon>{{ location.type === 'recent' ? 'history' : 'location_city' }}</mat-icon>
-                        {{ location.name }}
-                    </mat-option>
-                </mat-autocomplete>
+    <div class="todays-summary-container">
+        <mat-toolbar>
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+                <app-weather-icon size="regular" icon="partly-cloudy" summary="partly-cloudy"></app-weather-icon>
+                <span>Weather</span>
+            </div>
+            <div fxFlex></div>
+            <div class="autocomplete-field">
+                <mat-icon class="search-icon">search</mat-icon>
+                <form class="example-form" [formGroup]="searchForm">
+                    <input type="text" placeholder="Search Locations" [matAutocomplete]="auto" formControlName="searchInput" />
+                    <mat-autocomplete
+                        #auto="matAutocomplete"
+                        (optionSelected)="getWeather($event.option.value)"
+                        [displayWith]="searchFieldDisplay"
+                    >
+                        <mat-option *ngFor="let location of locations" [value]="location">
+                            <mat-icon>{{ location.type === 'recent' ? 'history' : 'location_city' }}</mat-icon>
+                            {{ location.name }}
+                        </mat-option>
+                    </mat-autocomplete>
 
-                <button
-                    class="clear-search-button"
-                    mat-button
-                    *ngIf="searchForm.controls.searchInput.value"
-                    matSuffix
-                    mat-icon-button
-                    aria-label="Clear"
-                    (click)="clearSearchField()"
-                >
-                    <mat-icon>close</mat-icon>
+                    <button
+                        class="clear-search-button"
+                        mat-button
+                        *ngIf="searchForm.controls.searchInput.value"
+                        matSuffix
+                        mat-icon-button
+                        aria-label="Clear"
+                        (click)="clearSearchField()"
+                    >
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </form>
+            </div>
+            <div fxFlex></div>
+            <button class="search-dialog-button" mat-icon-button (click)="openSearchDialog()">
+                <mat-icon>search</mat-icon>
+            </button>
+            <mat-menu #settingsMenu="matMenu">
+                <button mat-menu-item (click)="clearSearchHistory()">
+                    <mat-icon>backspace</mat-icon>
+                    <span>Clear Search History</span>
                 </button>
-            </form>
-        </div>
-        <div fxFlex></div>
-        <button class="search-dialog-button" mat-icon-button (click)="openSearchDialog()">
-            <mat-icon>search</mat-icon>
-        </button>
-        <mat-menu #settingsMenu="matMenu">
-            <button mat-menu-item (click)="toggleDarkMode()">
-                <mat-icon *ngIf="!darkMode">dark_mode</mat-icon>
-                <mat-icon *ngIf="darkMode">light_mode</mat-icon>
-                <span>{{ darkMode ? 'Light' : 'Dark' }} Mode</span>
+            </mat-menu>
+            <button mat-icon-button [matMenuTriggerFor]="settingsMenu">
+                <mat-icon>settings</mat-icon>
             </button>
-            <button mat-menu-item (click)="clearSearchHistory()">
-                <mat-icon>backspace</mat-icon>
-                <span>Clear Search History</span>
-            </button>
-        </mat-menu>
-        <button mat-icon-button [matMenuTriggerFor]="settingsMenu">
-            <mat-icon>settings</mat-icon>
-        </button>
-    </mat-toolbar>
-    <div *ngIf="forecast" fxLayout="column">
-        <div class="graph-container" *ngIf="forecast.hourly" fxFlex>
-            <app-hourly-graph [hourlyWeather]="forecast.hourly"></app-hourly-graph>
+        </mat-toolbar>
+        <div *ngIf="forecast" fxLayout="column">
+            <app-todays-summary [currentWeather]="forecast.currently" [weatherLocation]="selectedLocation"></app-todays-summary>
         </div>
+    </div>
+    <mat-card class="weather-info-card" *ngIf="forecast" fxLayout="column">
         <div class="alerts-container" *ngIf="forecast.alerts">
             <app-weather-alert
                 *ngFor="let alert of forecast.alerts"
@@ -61,11 +61,14 @@
                 [weatherAlertExpiration]="alert.expires"
             ></app-weather-alert>
         </div>
-        <app-todays-summary [currentWeather]="forecast.currently" [weatherLocation]="selectedLocation"></app-todays-summary>
         <app-hourly-view [hourlyWeather]="forecast.hourly" [weatherLocation]="selectedLocation"></app-hourly-view>
         <app-weekly-glance [dailyWeather]="forecast.daily" [weatherLocation]="selectedLocation"></app-weekly-glance>
-    </div>
+    </mat-card>
+    <div></div>
     <div *ngIf="!forecast" fxFlex>
-        <app-info-message icon="sunny" [message]="loadingMessage" isSvg="true" [rotate]="loading"></app-info-message>
+        <app-info-message icon="sunny-outline" [message]="loadingMessage" isSvg="true" [rotate]="loading"></app-info-message>
     </div>
+    <footer fxLayout="row" fxLayoutAlign="center center">
+        <p class="mat-caption">Powered by Dark Sky</p>
+    </footer>
 </main>

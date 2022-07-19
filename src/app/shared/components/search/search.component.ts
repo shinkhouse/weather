@@ -44,7 +44,7 @@ export class SearchComponent implements OnInit {
 
     getRecentHistory() {
         if (this.storage.getStorageItemByKey('search_history')) {
-            this.locations = JSON.parse(this.storage.getStorageItemByKey('search_history'));
+            this.locations = JSON.parse(this.storage.getStorageItemByKey('search_history')).reverse();
         }
     }
 

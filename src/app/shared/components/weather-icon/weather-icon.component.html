@@ -1,5 +1,12 @@
 <mat-icon
     [svgIcon]="icon"
-    [ngClass]="{ sunny: icon === 'sunny', 'clear-night': icon === 'clear-night', rainy: icon === 'rainy', large: size === 'large' }"
+    [ngClass]="{
+        sunny: icon === 'sunny',
+        'clear-night': icon === 'clear-night',
+        rainy: icon === 'rainy',
+        medium: size === 'medium',
+        large: size === 'large',
+        xlarge: size === 'xlarge'
+    }"
     matTooltip="{{ summary }}"
 ></mat-icon>

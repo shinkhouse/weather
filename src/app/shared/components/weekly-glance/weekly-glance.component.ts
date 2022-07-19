@@ -3,6 +3,7 @@ import { WeatherService } from 'src/app/core/services/weather.service';
 import { DatetimeService } from 'src/app/core/services/datetime.service';
 import { IconService } from 'src/app/core/services/icon.service';
 import { items, list, listStagger } from 'src/app/core/animations/list-stagger.animation';
+import { TitleCasePipe } from '@angular/common';
 
 @Component({
     selector: 'app-weekly-glance',
@@ -12,7 +13,7 @@ import { items, list, listStagger } from 'src/app/core/animations/list-stagger.a
 })
 export class WeeklyGlanceComponent implements OnInit, OnChanges {
 
-    constructor(public weather: WeatherService, public datetime: DatetimeService, public icons: IconService) { }
+    constructor(public weather: WeatherService, public datetime: DatetimeService, public icons: IconService, private titlecasePipe:TitleCasePipe) { }
 
     @Input() dailyWeather: any;
     @Input() weatherLocation: string;
@@ -28,6 +29,10 @@ export class WeeklyGlanceComponent implements OnInit, OnChanges {
                 day.icon = this.icons.getIconFromMapping(day.icon);
             });
         }
+    }
+
+    getSummaryFromIconName(iconName: string) {
+        return this.titlecasePipe.transform(iconName.replace('-', ' '));
     }
 
 }

@@ -1,7 +1,11 @@
+<header class="hourly-weather-header">
+    <h3>Hour by Hour</h3>
+    <h4 class="mat-caption">Forecast for 24 hours</h4>
+</header>
 <div @list class="hourly-container">
-    <mat-card @items fxLayoutGap="8px" class="hour" *ngFor="let hour of hourlyWeather.data">
-        <p class="time">{{ hour.time }}</p>
-        <app-weather-icon [icon]="hour.icon" [summary]="hour.summary"></app-weather-icon>
+    <mat-card @items class="hour" *ngFor="let hour of hourlyWeather.data">
+        <app-weather-icon size="medium" [icon]="hour.icon" [summary]="hour.summary"></app-weather-icon>
         <p class="temperature">{{ hour.temperature }}</p>
+        <p class="time">{{ hour.time }}</p>
     </mat-card>
 </div>

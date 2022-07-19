@@ -7,7 +7,7 @@ export class DatetimeService {
 
     constructor() { }
 
-    public dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    public dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
     getTimeOfDay(timestamp) {
         const date = new Date(timestamp * 1000);

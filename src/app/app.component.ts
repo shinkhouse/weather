@@ -40,10 +40,10 @@ export class AppComponent implements OnInit {
     public loading = false;
 
     ngOnInit() {
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-        if(prefersDark) {
-            this.toggleDarkMode();
-        }
+        // const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+        // if(prefersDark) {
+        this.toggleDarkMode();
+        // }
         this.getRecentHistory();
         this.searchForm = this.fb.group({
             searchInput: null,
